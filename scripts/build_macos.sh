@@ -20,7 +20,7 @@ clang++ -O3 -std=c++17 -ffast-math \
   -I"$(brew --prefix raylib)/include" \
   -L"$(brew --prefix libomp)/lib" \
   -L"$(brew --prefix raylib)/lib" \
-  nbody.cpp -o nbody -lomp -lraylib \
+  src/nbody.cpp -o nbody -lomp -lraylib \
   -framework OpenGL \
   -framework Cocoa \
   -framework IOKit \

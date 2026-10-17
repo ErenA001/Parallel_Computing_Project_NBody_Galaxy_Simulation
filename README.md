@@ -253,12 +253,12 @@ CSV measurements available in this repository.
 
 | CSV | Algorithm | Fastest Tested Threads | Speedup | Step Time |
 |---|---|---:|---:|---:|
-| [benchmark_bh_100003.csv](benchmark_bh_100003.csv) | Barnes-Hut | 12 | 5.69x | 31.44 ms |
-| [benchmark_bh_10002.csv](benchmark_bh_10002.csv) | Barnes-Hut | 12 | 4.55x | 3.02 ms |
-| [benchmark_bh_10009.csv](benchmark_bh_10009.csv) | Barnes-Hut | 12 | 4.76x | 3.01 ms |
-| [benchmark_bh_20002.csv](benchmark_bh_20002.csv) | Barnes-Hut | 12 | 4.90x | 6.08 ms |
-| [benchmark_naive_20002.csv](benchmark_naive_20002.csv) | Naive | 8 | 7.93x | 19.54 ms |
-| [benchmark_naive_20009.csv](benchmark_naive_20009.csv) | Naive | 8 | 7.53x | 20.61 ms |
+| [benchmarks/results/benchmark_bh_100003.csv](benchmarks/results/benchmark_bh_100003.csv) | Barnes-Hut | 12 | 5.69x | 31.44 ms |
+| [benchmarks/results/benchmark_bh_10002.csv](benchmarks/results/benchmark_bh_10002.csv) | Barnes-Hut | 12 | 4.55x | 3.02 ms |
+| [benchmarks/results/benchmark_bh_10009.csv](benchmarks/results/benchmark_bh_10009.csv) | Barnes-Hut | 12 | 4.76x | 3.01 ms |
+| [benchmarks/results/benchmark_bh_20002.csv](benchmarks/results/benchmark_bh_20002.csv) | Barnes-Hut | 12 | 4.90x | 6.08 ms |
+| [benchmarks/results/benchmark_naive_20002.csv](benchmarks/results/benchmark_naive_20002.csv) | Naive | 8 | 7.93x | 19.54 ms |
+| [benchmarks/results/benchmark_naive_20009.csv](benchmarks/results/benchmark_naive_20009.csv) | Naive | 8 | 7.53x | 20.61 ms |
 
 ### Measured Speedup
 
@@ -289,23 +289,32 @@ settings, compiler options, and system activity.
 ## Repository Structure
 
 ```text
-nbody.cpp
-scripts/
-  build_macos.sh
+src/
+  nbody.cpp
+tests/
+  test_omp.cpp
+benchmarks/
+  README.md
+  results/
+    benchmark_*.csv
 docs/
+  PROJECT_STRUCTURE.md
   media/
     menu.png
     simulation.png
     benchmark.png
-    demo.mp4
     speedup.png
     step-time.png
-benchmark_*.csv
-CONTRIBUTING.md
+scripts/
+  build_macos.sh
+  run_macos.sh
+  test_openmp.sh
+.github/
+  pull_request_template.md
 README.md
+CONTRIBUTING.md
+.gitignore
 ```
-
-Media files are present only after successful capture.
 
 ## Collaboration
 

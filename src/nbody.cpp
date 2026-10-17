@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
+#include <filesystem>
 #include <random>
 #include <string>
 #include <vector>
@@ -584,7 +585,13 @@ struct Bench {
 };
 
 static std::string writeCSV(const Bench& b, Algo a, int n) {
-  std::string name = std::string("benchmark_") + ALGO_TAG[a] + "_" + std::to_string(n) + ".csv";
+  std::error_code ec;
+  std::filesystem::create_directories(
+      "benchmarks/results", ec
+  );
+  std::string name =
+      std::string(ec ? "" : "benchmarks/results/")
+      + "benchmark_" + ALGO_TAG[a] + "_" + std::to_string(n) + ".csv";
   FILE* f = fopen(name.c_str(), "w");
   if (!f) return "(could not write CSV)";
   fprintf(f, "threads,ms_per_step,speedup,efficiency,build_ms,force_ms\n");

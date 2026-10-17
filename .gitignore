@@ -23,3 +23,49 @@ nbody.cpp.backup_*
 .env
 .env.*
 docs/media/*-raw.mov
+
+# Project privacy and local artifacts
+
+# Credentials and secrets
+.env
+.env.*
+!.env.example
+secrets/
+.local/
+credentials.json
+secrets.json
+.npmrc
+.pypirc
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Compiled binaries
+/nbody
+/test_omp
+.build/
+*.o
+*.dSYM/
+
+# Local development tools
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+
+# Backups and temporary files
+*.bak
+nbody.cpp.backup_*
+.nbody_*
+*.log
+
+# Recordings are not part of the repository
+*.mov
+*.mp4
+*.gif
