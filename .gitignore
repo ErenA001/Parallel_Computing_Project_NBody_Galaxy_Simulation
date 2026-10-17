@@ -1,0 +1,11 @@
+.venv/
+.DS_Store
+/nbody
+/test_omp
+*.bak
+nbody.cpp.backup_*
+.nbody_*
+*.o
+*.dSYM/
+.env
+.env.*
