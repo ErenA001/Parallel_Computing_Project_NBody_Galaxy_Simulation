@@ -11,7 +11,7 @@
 
 **An interactive N-body galaxy simulator for exploring parallel algorithms, gravitational interactions, and CPU performance.**
 
-*Screenshots will appear after capturing the actual application.*
+<img src="docs/media/menu.png" alt="N-Body Galaxy Simulator" width="920">
 
 </div>
 
@@ -203,15 +203,25 @@ Target render FPS: **120**. Actual FPS depends on hardware and workload.
 
 ## Screenshots
 
-Screenshots in this repository are captured from
-the actual running application.
+Real screenshots captured from the running application on macOS.
 
-*Real application screenshots pending.*
+### Main Menu
 
+![Main Menu](docs/media/menu.png)
+
+### Live Galaxy Simulation
+
+![Galaxy Simulation](docs/media/simulation.png)
+
+### Benchmark Results
+
+![Benchmark Results](docs/media/benchmark.png)
 
 ## Demo Video
 
-*Real demo video pending.*
+![Galaxy Demo Preview](docs/media/demo-preview.gif)
+
+[Watch the real 20-second demo video (MP4)](docs/media/demo.mp4)
 
 ## Benchmark and Performance
 
