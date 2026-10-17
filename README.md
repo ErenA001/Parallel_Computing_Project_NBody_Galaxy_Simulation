@@ -203,25 +203,19 @@ Target render FPS: **120**. Actual FPS depends on hardware and workload.
 
 ## Screenshots
 
-Real screenshots captured from the running application on macOS.
+Screenshots captured from the running application.
 
 ### Main Menu
 
 ![Main Menu](docs/media/menu.png)
 
-### Live Galaxy Simulation
+### Galaxy Simulation
 
 ![Galaxy Simulation](docs/media/simulation.png)
 
 ### Benchmark Results
 
 ![Benchmark Results](docs/media/benchmark.png)
-
-## Demo Video
-
-![Galaxy Demo Preview](docs/media/demo-preview.gif)
-
-[Watch the real 20-second demo video (MP4)](docs/media/demo.mp4)
 
 ## Benchmark and Performance
 
