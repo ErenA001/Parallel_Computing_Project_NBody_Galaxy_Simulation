@@ -9,3 +9,17 @@ nbody.cpp.backup_*
 *.dSYM/
 .env
 .env.*
+
+# N-BODY LOCAL FILES
+.venv/
+.DS_Store
+/nbody
+/test_omp
+*.o
+*.dSYM/
+*.bak
+nbody.cpp.backup_*
+.nbody_*
+.env
+.env.*
+docs/media/*-raw.mov
