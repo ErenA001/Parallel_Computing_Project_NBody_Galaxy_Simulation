@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-macos:
+    name: Build (macOS)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: brew install libomp raylib
+
+      - name: Build 2D simulator
+        run: ./scripts/build_macos.sh
+
+      - name: Build 3D simulator
+        run: ./scripts/build_macos_3d.sh
+
+      - name: Build & run OpenMP test
+        run: ./scripts/test_openmp.sh

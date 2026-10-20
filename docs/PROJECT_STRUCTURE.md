@@ -2,16 +2,18 @@
 
 ## src/
 
-C++17 implementation of the N-Body galaxy simulator,
-including gravitational algorithms, OpenMP, and raylib.
+C++17 implementations of the N-Body galaxy simulator.
 
-The implementation currently remains in one C++ source
-file. Refactoring it into modules should be handled in
-a separate reviewed change.
+- `nbody.cpp` — 2D simulator: Barnes-Hut quadtree, OpenMP, raylib.
+- `nbody3d.cpp` — 3D simulator: Barnes-Hut octree, perspective camera,
+  full 3D disk/sphere initial conditions for all five scenarios.
+
+Both implementations are contained in a single self-contained C++ source file.
+Refactoring into separate modules should be handled in a reviewed change.
 
 ## tests/
 
-OpenMP environment test.
+OpenMP environment test (`test_omp.cpp`).
 
 ## benchmarks/results/
 
@@ -25,13 +27,24 @@ Application screenshots and performance charts.
 
 macOS build, application launch, and OpenMP test scripts.
 
+- `build_macos.sh` — compile 2D simulator
+- `build_macos_3d.sh` — compile 3D simulator
+- `run_macos.sh` — launch 2D simulator (builds if needed)
+- `run_macos_3d.sh` — launch 3D simulator (builds if needed)
+- `test_openmp.sh` — compile and run OpenMP thread test
+
+Alternatively, use `make`, `make 3d`, `make all`, etc. (see `Makefile`).
+
 ## .github/
 
-Pull request review template.
+- `workflows/build.yml` — GitHub Actions CI: builds both simulators and
+  runs the OpenMP test on every push and PR to `main`.
+- `ISSUE_TEMPLATE/` — bug report and feature request templates.
+- `pull_request_template.md` — PR review checklist.
 
 ## Private and Local Files
 
-The `.gitignore` excludes machine-specific binaries,
+The `.gitignore` excludes machine-specific binaries (`/nbody`, `/nbody3d`),
 backups, credentials, environment files, and recordings.
 
 Important: ignored files are not necessarily removed

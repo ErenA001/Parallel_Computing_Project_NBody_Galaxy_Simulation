@@ -1,32 +1,27 @@
-.venv/
-.DS_Store
+# ===== Compiled binaries =====
 /nbody
+/nbody3d
 /test_omp
-*.bak
-nbody.cpp.backup_*
-.nbody_*
+.build/
 *.o
 *.dSYM/
-.env
-.env.*
 
-# N-BODY LOCAL FILES
-.venv/
-.DS_Store
-/nbody
-/test_omp
-*.o
-*.dSYM/
+# ===== Backups and temporary files =====
 *.bak
-nbody.cpp.backup_*
+*.backup_*
 .nbody_*
-.env
-.env.*
-docs/media/*-raw.mov
+*.log
 
-# Project privacy and local artifacts
+# ===== Local development tools =====
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
 
-# Credentials and secrets
+# ===== Credentials and secrets =====
 .env
 .env.*
 !.env.example
@@ -43,29 +38,8 @@ secrets.json
 id_rsa
 id_ed25519
 
-# Compiled binaries
-/nbody
-/test_omp
-.build/
-*.o
-*.dSYM/
-
-# Local development tools
-.venv/
-venv/
-__pycache__/
-*.pyc
-.DS_Store
-.idea/
-.vscode/
-
-# Backups and temporary files
-*.bak
-nbody.cpp.backup_*
-.nbody_*
-*.log
-
-# Recordings are not part of the repository
+# ===== Recordings and media =====
 *.mov
 *.mp4
 *.gif
+docs/media/*-raw.mov

@@ -8,6 +8,7 @@
 ![OpenMP](https://img.shields.io/badge/Parallelism-OpenMP-5CE1E6?style=flat-square)
 ![raylib](https://img.shields.io/badge/Graphics-raylib-8B5CF6?style=flat-square)
 ![macOS](https://img.shields.io/badge/Platform-macOS-333?style=flat-square&logo=apple)
+![Build](https://github.com/ErenA001/Parallel_Computing_Project_NBody_Galaxy_Simulation/actions/workflows/build.yml/badge.svg)
 
 **An interactive N-body galaxy simulator for exploring parallel algorithms, gravitational interactions, and CPU performance.**
 
@@ -19,8 +20,8 @@
 
 ## Overview
 
-This project implements a two-dimensional gravitational
-N-body simulation using C++17, OpenMP, and raylib.
+This project implements gravitational N-body simulations
+in both **2D** and **3D** using C++17, OpenMP, and raylib.
 
 Its primary purpose is to investigate how algorithm
 selection and CPU parallelization influence the
@@ -29,7 +30,7 @@ performance of computationally intensive simulations.
 The project compares:
 
 - Direct all-pairs gravitational force calculation.
-- Barnes-Hut hierarchical force approximation.
+- Barnes-Hut hierarchical force approximation (quadtree in 2D, octree in 3D).
 - Single-threaded and multi-threaded execution.
 
 The simulator includes interactive visualizations,
@@ -40,11 +41,22 @@ performance measurements, and benchmark exports.
 > prediction system. CPU threads calculate physics;
 > raylib provides graphics.
 
+## Simulators
+
+| Binary | Source | Dimensions | Tree |
+|---|---|---|---|
+| `./nbody` | `src/nbody.cpp` | 2D | Quadtree |
+| `./nbody3d` | `src/nbody3d.cpp` | 3D | Octree |
+
+The 3D version extends every scenario into full three-dimensional space,
+adds perspective camera controls, orbital rotation, and replaces the
+Barnes-Hut quadtree with an octree for 8-children spatial decomposition.
+
 ## Features
 
-- Five interactive simulation scenarios.
+- Five interactive simulation scenarios (2D and 3D).
 - Naive O(N²) gravitational force calculation.
-- Barnes-Hut quadtree approximation.
+- Barnes-Hut quadtree/octree approximation.
 - OpenMP-based parallel force evaluation.
 - Adjustable CPU thread count.
 - Variable particle counts.
@@ -90,7 +102,8 @@ using OpenMP with static scheduling.
 Barnes-Hut reduces computational work by organizing
 particles into a hierarchical spatial tree.
 
-This implementation uses a two-dimensional quadtree.
+The 2D implementation uses a **quadtree**; the 3D
+implementation uses an **octree** with 8 children.
 
 Distant particle groups can be approximated using
 their combined mass and center of mass.
@@ -163,16 +176,28 @@ are already installed.
 ```bash
 git clone https://github.com/ErenA001/Parallel_Computing_Project_NBody_Galaxy_Simulation.git
 cd Parallel_Computing_Project_NBody_Galaxy_Simulation
-./scripts/build_macos.sh
-./nbody
+make        # build 2D simulator
+make 3d     # build 3D simulator
 ```
 
-If the repository is already downloaded:
+Or use the scripts directly:
 
 ```bash
-./scripts/build_macos.sh
-./nbody
+./scripts/build_macos.sh     # 2D
+./scripts/build_macos_3d.sh  # 3D
 ```
+
+#### Makefile targets
+
+| Target | Description |
+|---|---|
+| `make` | Build 2D simulator (`./nbody`) |
+| `make 3d` | Build 3D simulator (`./nbody3d`) |
+| `make all` | Build both |
+| `make test` | Build and run OpenMP test |
+| `make run` | Build and launch 2D |
+| `make run3d` | Build and launch 3D |
+| `make clean` | Remove compiled binaries |
 
 The physics runs on CPU threads. The graphical
 interface uses raylib and OpenGL.
@@ -180,6 +205,8 @@ interface uses raylib and OpenGL.
 Target render FPS: **120**. Actual FPS depends on hardware and workload.
 
 ## Controls
+
+### 2D Simulator (`./nbody`)
 
 | Input | Function |
 |---|---|
@@ -200,6 +227,29 @@ Target render FPS: **120**. Actual FPS depends on hardware and workload.
 | Q / E | Zoom out / in |
 | Mouse wheel | Zoom |
 | Mouse drag | Pan camera |
+
+### 3D Simulator (`./nbody3d`)
+
+| Input | Function |
+|---|---|
+| Space | Pause / resume |
+| A | Naive / Barnes-Hut |
+| Up / Down | Change OpenMP threads |
+| 1 / M | One / maximum threads |
+| Left / Right | Change particle count |
+| Z / X | Simulation speed |
+| G | Toggle octree overlay |
+| O | Toggle orbit / free camera |
+| K / L | Barnes-Hut theta |
+| C | Change color mode |
+| R | Reset simulation |
+| H | Show / hide HUD |
+| 0 | Reset camera |
+| Esc / Tab | Return to menu |
+| F | Fullscreen |
+| Q / E | Zoom out / in |
+| Mouse wheel | Zoom |
+| Mouse drag | Orbit / pan camera |
 
 ## Screenshots
 
@@ -290,7 +340,8 @@ settings, compiler options, and system activity.
 
 ```text
 src/
-  nbody.cpp
+  nbody.cpp        ← 2D simulator (quadtree Barnes-Hut)
+  nbody3d.cpp      ← 3D simulator (octree Barnes-Hut)
 tests/
   test_omp.cpp
 benchmarks/
@@ -307,10 +358,19 @@ docs/
     step-time.png
 scripts/
   build_macos.sh
+  build_macos_3d.sh
   run_macos.sh
+  run_macos_3d.sh
   test_openmp.sh
 .github/
+  workflows/
+    build.yml
+  ISSUE_TEMPLATE/
+    bug_report.md
+    feature_request.md
   pull_request_template.md
+Makefile
+CHANGELOG.md
 README.md
 CONTRIBUTING.md
 .gitignore
