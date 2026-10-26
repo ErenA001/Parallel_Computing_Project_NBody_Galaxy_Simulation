@@ -7,8 +7,9 @@ on:
     branches: [main]
 
 jobs:
-  build-macos:
-    name: Build (macOS)
+  # Original macOS job: Makefile / shell scripts with Homebrew
+  build-macos-make:
+    name: Build (macOS, Makefile)
     runs-on: macos-latest
 
     steps:
@@ -26,3 +27,37 @@ jobs:
 
       - name: Build & run OpenMP test
         run: ./scripts/test_openmp.sh
+
+  # Cross-platform job: CMake on Windows, macOS and Linux
+  build-cmake:
+    name: Build (CMake, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libx11-dev libxrandr-dev \
+            libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev \
+            libxinerama-dev libwayland-dev libxkbcommon-dev
+
+      - name: Install macOS dependencies
+        if: runner.os == 'macOS'
+        run: brew install libomp
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Run OpenMP test
+        run: ctest --test-dir build -C Release --output-on-failure

@@ -43,3 +43,9 @@ id_ed25519
 *.mp4
 *.gif
 docs/media/*-raw.mov
+
+# ===== CMake build directories =====
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt

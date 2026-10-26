@@ -7,6 +7,10 @@ All notable changes to this project are documented here.
 ## [Unreleased]
 
 ### Added
+- `CMakeLists.txt` — cross-platform build for Windows (MSVC / MinGW), macOS and Linux;
+  fetches raylib automatically when it is not installed
+- CI: CMake build matrix on Ubuntu, Windows and macOS with OpenMP test via `ctest`
+- README: Windows / Linux / CMake installation and run instructions
 - `src/nbody3d.cpp` — 3D Barnes-Hut octree simulator with perspective camera,
   orbit controls, and full 3D disk/sphere initial conditions for all five scenarios
 - `scripts/build_macos_3d.sh` — build script for the 3D simulator
@@ -19,6 +23,7 @@ All notable changes to this project are documented here.
 - `CHANGELOG.md` — this file
 
 ### Changed
+- `.gitignore` / `.gitattributes` — ignore CMake `build/` directories, normalize CMake file line endings
 - `.gitignore` — consolidated and cleaned up; now also ignores `/nbody3d` binary
 
 ---
