@@ -33,12 +33,15 @@ macOS build, application launch, and OpenMP test scripts.
 - `run_macos_3d.sh` — launch 3D simulator (builds if needed)
 - `test_openmp.sh` — compile and run OpenMP thread test
 
-Alternatively, use `make`, `make 3d`, `make all`, etc. (see `Makefile`).
+Cross-platform (Windows / macOS / Linux): use `CMakeLists.txt` in the repository root
+(`cmake -S . -B build && cmake --build build --config Release`).
+
+On macOS you can also use `make`, `make 3d`, `make all`, etc. (see `Makefile`).
 
 ## .github/
 
-- `workflows/build.yml` — GitHub Actions CI: builds both simulators and
-  runs the OpenMP test on every push and PR to `main`.
+- `workflows/build.yml` — GitHub Actions CI: macOS Makefile build plus a CMake
+  build matrix (Ubuntu, Windows, macOS) with the OpenMP test, on every push and PR to `main`.
 - `ISSUE_TEMPLATE/` — bug report and feature request templates.
 - `pull_request_template.md` — PR review checklist.
 

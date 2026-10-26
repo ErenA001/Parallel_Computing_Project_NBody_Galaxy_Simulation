@@ -7,7 +7,7 @@
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-00599C?style=flat-square&logo=cplusplus)
 ![OpenMP](https://img.shields.io/badge/Parallelism-OpenMP-5CE1E6?style=flat-square)
 ![raylib](https://img.shields.io/badge/Graphics-raylib-8B5CF6?style=flat-square)
-![macOS](https://img.shields.io/badge/Platform-macOS-333?style=flat-square&logo=apple)
+![Platforms](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-333?style=flat-square)
 ![Build](https://github.com/ErenA001/Parallel_Computing_Project_NBody_Galaxy_Simulation/actions/workflows/build.yml/badge.svg)
 
 **An interactive N-body galaxy simulator for exploring parallel algorithms, gravitational interactions, and CPU performance.**
@@ -160,6 +160,7 @@ The experiment demonstrates:
 - raylib
 
 Apple Silicon is the primary development target.
+For Windows or Linux, see the CMake section below.
 
 ### Install Dependencies
 
@@ -203,6 +204,64 @@ The physics runs on CPU threads. The graphical
 interface uses raylib and OpenGL.
 
 Target render FPS: **120**. Actual FPS depends on hardware and workload.
+
+## Installation — Windows, macOS, Linux (CMake)
+
+CMake is the cross-platform build path. It works on Windows,
+macOS, and Linux, and downloads raylib automatically if it is
+not installed.
+
+### Requirements
+
+| Platform | Needs |
+|---|---|
+| Windows | [CMake](https://cmake.org/download/), Git, and either Visual Studio 2022 (with "Desktop development with C++") or MSYS2/MinGW-w64 |
+| macOS | Xcode Command Line Tools, Homebrew, CMake, libomp |
+| Linux | GCC or Clang, CMake, and the X11/OpenGL development packages |
+
+### Build
+
+Run these from the repository root:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release
+```
+
+The first configure step downloads and builds raylib, so it needs
+an internet connection and takes a little longer.
+
+Platform notes:
+
+- **Windows (Visual Studio):** use "x64 Native Tools Command Prompt" or
+  PowerShell. Executables are in `build\Release\`.
+- **Windows (MSYS2/MinGW):** install the toolchain with
+  `pacman -S mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja`,
+  then configure with `-G Ninja`.
+- **macOS:** `brew install cmake libomp`.
+- **Linux (Debian/Ubuntu):**
+  `sudo apt install build-essential cmake libasound2-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev libwayland-dev libxkbcommon-dev`
+
+### Run
+
+Run from the repository root so benchmark CSV files are saved to
+`benchmarks/results/`:
+
+```bash
+./build/nbody          # 2D (Linux / macOS / MinGW)
+./build/nbody3d        # 3D
+```
+
+```powershell
+.\build\Release\nbody.exe      # 2D (Visual Studio)
+.\build\Release\nbody3d.exe    # 3D
+```
+
+### Test OpenMP
+
+```bash
+ctest --test-dir build -C Release --output-on-failure
+```
 
 ## Controls
 
@@ -369,7 +428,8 @@ scripts/
     bug_report.md
     feature_request.md
   pull_request_template.md
-Makefile
+CMakeLists.txt     ← cross-platform build (Windows / macOS / Linux)
+Makefile           ← macOS build (Homebrew)
 CHANGELOG.md
 README.md
 CONTRIBUTING.md
